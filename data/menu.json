@@ -1,0 +1,153 @@
+{
+  "productos": [
+    {
+      "id": "prod-001",
+      "tipo": "Plato",
+      "nombre": "Pulpo a la Gallega",
+      "precio": 18.5,
+      "descripcion": "Pulpo cocido con papas, aceite de oliva y pimentón",
+      "receta": {
+        "ing-001": 0.3,
+        "ing-002": 0.4,
+        "ing-003": 0.05,
+        "ing-004": 0.02
+      },
+      "categoria": "Principal"
+    },
+    {
+      "id": "prod-002",
+      "tipo": "Plato",
+      "nombre": "Empanada Gallega",
+      "precio": 3.5,
+      "descripcion": "Empanada tradicional de carne",
+      "receta": {
+        "ing-005": 1,
+        "ing-006": 0.15,
+        "ing-007": 0.05
+      },
+      "categoria": "Entrada"
+    },
+    {
+      "id": "prod-003",
+      "tipo": "Plato",
+      "nombre": "Bocadillo de Jamón",
+      "precio": 5.0,
+      "descripcion": "Bocadillo de jamón serrano con tomate",
+      "receta": {
+        "ing-008": 1,
+        "ing-009": 0.08,
+        "ing-012": 0.05
+      },
+      "categoria": "Entrada"
+    },
+    {
+      "id": "prod-004",
+      "tipo": "Plato",
+      "nombre": "Tarta de Santiago",
+      "precio": 4.5,
+      "descripcion": "Tarta tradicional de almendras",
+      "receta": {
+        "ing-013": 0.2
+      },
+      "categoria": "Postre"
+    },
+    {
+      "id": "prod-005",
+      "tipo": "Plato",
+      "nombre": "Ensalada Mixta",
+      "precio": 6.0,
+      "descripcion": "Lechuga, tomate, cebolla y queso",
+      "receta": {
+        "ing-011": 0.25,
+        "ing-012": 0.15,
+        "ing-007": 0.05,
+        "ing-010": 0.05
+      },
+      "categoria": "Entrada"
+    },
+    {
+      "id": "prod-006",
+      "tipo": "Bebida",
+      "nombre": "Vino Albariño",
+      "precio": 12.0,
+      "descripcion": "Vino blanco gallego DO Rías Baixas",
+      "receta": {},
+      "alcoholica": true
+    },
+    {
+      "id": "prod-007",
+      "tipo": "Bebida",
+      "nombre": "Cerveza Estrella Galicia",
+      "precio": 2.5,
+      "descripcion": "Cerveza rubia gallega",
+      "receta": {},
+      "alcoholica": true
+    },
+    {
+      "id": "prod-008",
+      "tipo": "Bebida",
+      "nombre": "Agua Mineral",
+      "precio": 1.5,
+      "descripcion": "Agua mineral natural",
+      "receta": {},
+      "alcoholica": false
+    },
+    {
+      "id": "prod-009",
+      "tipo": "Bebida",
+      "nombre": "Café",
+      "precio": 1.2,
+      "descripcion": "Café expreso",
+      "receta": {},
+      "alcoholica": false
+    },
+    {
+      "id": "prod-010",
+      "tipo": "Bebida",
+      "nombre": "Queimada",
+      "precio": 8.0,
+      "descripcion": "Bebida tradicional gallega",
+      "receta": {},
+      "alcoholica": true
+    },
+    {
+      "id": "d43c62d3-10cc-4192-870c-44328fe59368",
+      "tipo": "Plato",
+      "nombre": "Lacón con Grelos",
+      "precio": 16.0,
+      "descripcion": "Plato tradicional gallego con lacón, grelos y cachelos",
+      "receta": {
+        "037d75d0-5470-473a-999f-6537948cc848": 0.3,
+        "4449b7c7-7164-4d97-8f21-537c8350a425": 0.2,
+        "5bc66add-bcbb-46b6-8861-cbf227207a7e": 0.3
+      },
+      "categoria": "Principal"
+    },
+    {
+      "id": "2e33ab26-0032-4245-b898-64bddd7e5a3d",
+      "tipo": "Plato",
+      "nombre": "Lacón con Grelos",
+      "precio": 16.0,
+      "descripcion": "Plato tradicional gallego con lacón, grelos y cachelos",
+      "receta": {
+        "7b615d02-8640-4e38-ac0e-92f80330cd9f": 0.3,
+        "7de0f2a3-91c9-4e25-a612-0239272f0096": 0.2,
+        "1902de25-4e91-4981-9449-7650cab32382": 0.3
+      },
+      "categoria": "Principal"
+    },
+    {
+      "id": "a017c97e-a2e2-41b5-9b92-824bf522fdea",
+      "tipo": "Plato",
+      "nombre": "Lacón con Grelos",
+      "precio": 16.0,
+      "descripcion": "Plato tradicional gallego con lacón, grelos y cachelos",
+      "receta": {
+        "30804477-3487-4b61-9fb2-84bacfde38fb": 0.3,
+        "93ac13be-3539-4636-8942-07a9ef4be829": 0.2,
+        "3944380a-9789-4147-9b31-c0019aaa3715": 0.3
+      },
+      "categoria": "Principal"
+    }
+  ]
+}

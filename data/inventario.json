@@ -1,0 +1,166 @@
+{
+  "ingredientes": [
+    {
+      "id": "ing-001",
+      "nombre": "Pulpo",
+      "unidad": "kg",
+      "cantidad": 53.80000000000001
+    },
+    {
+      "id": "ing-002",
+      "nombre": "Papas",
+      "unidad": "kg",
+      "cantidad": 48.400000000000006
+    },
+    {
+      "id": "ing-003",
+      "nombre": "Aceite de oliva",
+      "unidad": "litros",
+      "cantidad": 14.799999999999997
+    },
+    {
+      "id": "ing-004",
+      "nombre": "Pimentón",
+      "unidad": "kg",
+      "cantidad": 7.920000000000002
+    },
+    {
+      "id": "ing-005",
+      "nombre": "Empanada (masa)",
+      "unidad": "unidades",
+      "cantidad": 232.0
+    },
+    {
+      "id": "ing-006",
+      "nombre": "Carne picada",
+      "unidad": "kg",
+      "cantidad": 17.3
+    },
+    {
+      "id": "ing-007",
+      "nombre": "Cebolla",
+      "unidad": "kg",
+      "cantidad": 10.949999999999998
+    },
+    {
+      "id": "ing-008",
+      "nombre": "Pan",
+      "unidad": "unidades",
+      "cantidad": 80.0
+    },
+    {
+      "id": "ing-009",
+      "nombre": "Jamón",
+      "unidad": "kg",
+      "cantidad": 5.0
+    },
+    {
+      "id": "ing-010",
+      "nombre": "Queso",
+      "unidad": "kg",
+      "cantidad": 5.8500000000000005
+    },
+    {
+      "id": "ing-011",
+      "nombre": "Lechuga",
+      "unidad": "unidades",
+      "cantidad": 44.25
+    },
+    {
+      "id": "ing-012",
+      "nombre": "Tomate",
+      "unidad": "kg",
+      "cantidad": 9.549999999999999
+    },
+    {
+      "id": "ing-013",
+      "nombre": "Tarta (base)",
+      "unidad": "unidades",
+      "cantidad": 20.0
+    },
+    {
+      "id": "ing-014",
+      "nombre": "Huevos",
+      "unidad": "unidades",
+      "cantidad": 60.0
+    },
+    {
+      "id": "ing-015",
+      "nombre": "Nata",
+      "unidad": "litros",
+      "cantidad": 8.0
+    },
+    {
+      "id": "037d75d0-5470-473a-999f-6537948cc848",
+      "nombre": "Lacón",
+      "unidad": "kg",
+      "cantidad": 15.0
+    },
+    {
+      "id": "4449b7c7-7164-4d97-8f21-537c8350a425",
+      "nombre": "Grelos",
+      "unidad": "kg",
+      "cantidad": 10.0
+    },
+    {
+      "id": "5bc66add-bcbb-46b6-8861-cbf227207a7e",
+      "nombre": "Cachelos",
+      "unidad": "kg",
+      "cantidad": 20.0
+    },
+    {
+      "id": "7b615d02-8640-4e38-ac0e-92f80330cd9f",
+      "nombre": "Lacón",
+      "unidad": "kg",
+      "cantidad": 15.0
+    },
+    {
+      "id": "7de0f2a3-91c9-4e25-a612-0239272f0096",
+      "nombre": "Grelos",
+      "unidad": "kg",
+      "cantidad": 10.0
+    },
+    {
+      "id": "1902de25-4e91-4981-9449-7650cab32382",
+      "nombre": "Cachelos",
+      "unidad": "kg",
+      "cantidad": 20.0
+    },
+    {
+      "id": "f3e2b5aa-6fe8-4ec7-94b8-c18e9ac67963",
+      "nombre": "Ingrediente A",
+      "unidad": "kg",
+      "cantidad": 6.0
+    },
+    {
+      "id": "73ae14fc-b953-4bf1-b023-aeac158175d7",
+      "nombre": "Ingrediente B",
+      "unidad": "litros",
+      "cantidad": 3.0
+    },
+    {
+      "id": "df98f28f-c984-4884-a41e-2bae50749c5a",
+      "nombre": "Ingrediente C",
+      "unidad": "unidades",
+      "cantidad": 10.0
+    },
+    {
+      "id": "30804477-3487-4b61-9fb2-84bacfde38fb",
+      "nombre": "Lacón",
+      "unidad": "kg",
+      "cantidad": 15.0
+    },
+    {
+      "id": "93ac13be-3539-4636-8942-07a9ef4be829",
+      "nombre": "Grelos",
+      "unidad": "kg",
+      "cantidad": 10.0
+    },
+    {
+      "id": "3944380a-9789-4147-9b31-c0019aaa3715",
+      "nombre": "Cachelos",
+      "unidad": "kg",
+      "cantidad": 20.0
+    }
+  ]
+}

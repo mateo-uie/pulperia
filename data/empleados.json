@@ -1,0 +1,39 @@
+{
+  "empleados": [
+    {
+      "id": "emp-001",
+      "tipo": "Administrador",
+      "nombre": "Carlos Galán",
+      "email": "carlos.galan@pulperia.com",
+      "rol": "administrador"
+    },
+    {
+      "id": "emp-002",
+      "tipo": "Mesero",
+      "nombre": "María González",
+      "email": "maria.gonzalez@pulperia.com",
+      "rol": "mesero"
+    },
+    {
+      "id": "emp-003",
+      "tipo": "Mesero",
+      "nombre": "Juan Pérez",
+      "email": "juan.perez@pulperia.com",
+      "rol": "mesero"
+    },
+    {
+      "id": "emp-004",
+      "tipo": "Cocinero",
+      "nombre": "Rosa Martínez",
+      "email": "rosa.martinez@pulperia.com",
+      "rol": "cocinero"
+    },
+    {
+      "id": "emp-005",
+      "tipo": "Cocinero",
+      "nombre": "Antonio López",
+      "email": "antonio.lopez@pulperia.com",
+      "rol": "cocinero"
+    }
+  ]
+}
