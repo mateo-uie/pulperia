@@ -138,3 +138,12 @@ class CajaService:
             if factura.fecha.date() == hoy:
                 total += factura.total
         return total
+    
+    def obtener_total_dia(self) -> float:
+        """
+        Obtiene el total de ingresos del día (alias de calcular_ingresos_hoy).
+        
+        Returns:
+            float: Total de ingresos de hoy.
+        """
+        return self.calcular_ingresos_hoy()

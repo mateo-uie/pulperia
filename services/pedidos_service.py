@@ -198,6 +198,22 @@ class PedidosService:
         
         # Crear el pedido
         pedido = Pedido(tipo, items, mesa_id, direccion_delivery, telefono_delivery)
+        
+        # Descontar ingredientes del inventario
+        if recetas_totales:
+            for ing_id, cantidad in recetas_totales.items():
+                ingrediente = self.inventario_service.obtener_ingrediente(ing_id)
+                if ingrediente:
+                    try:
+                        ingrediente.descontar(cantidad)
+                        print(f"✓ Descontado {cantidad} {ingrediente.unidad} de {ingrediente.nombre}")
+                    except ValueError as e:
+                        # Revertir cambios si hay error
+                        return (False, f"Error al descontar inventario: {str(e)}", None)
+            
+            # Guardar inventario actualizado
+            self.inventario_service.guardar_inventario()
+        
         self.pedidos[pedido.id] = pedido
         
         # Si es pedido de mesa, actualizar la mesa

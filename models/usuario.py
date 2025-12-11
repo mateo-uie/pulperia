@@ -1,4 +1,6 @@
-import uuid
+from uuid import uuid4, UUID
+from datetime import datetime
+from typing import Optional
 
 class Usuario:
     """Clase base que representa un usuario/empleado del sistema."""
@@ -12,10 +14,15 @@ class Usuario:
             email (str): Correo electrónico.
             rol (str): Rol del usuario.
         """
-        self.id = str(uuid.uuid4())
+        self.id: UUID = uuid4()
         self.nombre = nombre
         self.email = email
         self.rol = rol
+        # Campos para autenticación (opcionales)
+        self.username: Optional[str] = None
+        self.hashed_password: Optional[str] = None
+        self.created_at: Optional[datetime] = None
+        self.is_active: bool = True
     
     def es_admin(self) -> bool:
         """
@@ -28,13 +35,21 @@ class Usuario:
     
     def to_dict(self) -> dict:
         """Convierte el usuario a diccionario para JSON."""
-        return {
-            "id": self.id,
+        data = {
+            "id": str(self.id),
             "tipo": self.__class__.__name__,
             "nombre": self.nombre,
             "email": self.email,
             "rol": self.rol
         }
+        if self.username:
+            data["username"] = self.username
+        if self.hashed_password:
+            data["hashed_password"] = self.hashed_password
+        if self.created_at:
+            data["created_at"] = self.created_at.isoformat()
+        data["is_active"] = self.is_active
+        return data
     
     @staticmethod
     def from_dict(data: dict) -> 'Usuario':
@@ -48,7 +63,16 @@ class Usuario:
             user = Cocinero(data["nombre"], data["email"])
         else:
             user = Usuario(data["nombre"], data["email"], data.get("rol", "empleado"))
-        user.id = data["id"]
+        
+        # Restaurar ID y campos de autenticación
+        from uuid import UUID
+        user.id = UUID(data["id"]) if isinstance(data["id"], str) else data["id"]
+        user.username = data.get("username")
+        user.hashed_password = data.get("hashed_password")
+        user.is_active = data.get("is_active", True)
+        if "created_at" in data:
+            user.created_at = datetime.fromisoformat(data["created_at"])
+        
         return user
     
     def __str__(self) -> str:
