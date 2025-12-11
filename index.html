@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulpería Galán - Sistema de Gestión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍽️ Pulpería Galán</h1>
+            <p>Sistema de Gestión de Restaurante</p>
+        </div>
+
+        <!-- Mensaje de alerta -->
+        <div id="alertContainer"></div>
+
+        <!-- Vista de Login/Registro -->
+        <div id="authView" class="card">
+            <h2>Iniciar Sesión / Registrarse</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <button class="btn btn-primary" onclick="showLoginForm()" id="btnShowLogin">Iniciar Sesión</button>
+                <button class="btn btn-secondary" onclick="showRegisterForm()" id="btnShowRegister">Registrarse</button>
+            </div>
+
+            <!-- Formulario de Login -->
+            <div id="loginForm" class="hidden">
+                <h3 style="margin-bottom: 15px;">Iniciar Sesión</h3>
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" id="loginUsername" placeholder="Ingrese su usuario">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" placeholder="Ingrese su contraseña">
+                </div>
+                <button class="btn btn-primary" onclick="login()">Iniciar Sesión</button>
+            </div>
+
+            <!-- Formulario de Registro -->
+            <div id="registerForm" class="hidden">
+                <h3 style="margin-bottom: 15px;">Registrarse</h3>
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input type="text" id="regUsername" placeholder="Elija un nombre de usuario">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="su@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="form-group">
+                    <label>Rol</label>
+                    <select id="regRol">
+                        <option value="empleado">Empleado</option>
+                        <option value="mesero">Mesero</option>
+                        <option value="cocinero">Cocinero</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+                <button class="btn btn-success" onclick="register()">Registrarse</button>
+            </div>
+        </div>
+
+        <!-- Vista Principal (Dashboard) -->
+        <div id="mainView" class="hidden">
+            <!-- Info del usuario -->
+            <div class="user-info">
+                <div>
+                    <span>Bienvenido, </span>
+                    <strong id="currentUser"></strong>
+                    <span class="badge" id="currentRole"></span>
+                </div>
+                <button class="btn btn-danger" onclick="logout()">Cerrar Sesión</button>
+            </div>
+
+            <!-- Navegación -->
+            <div class="nav-buttons">
+                <button class="btn btn-primary" onclick="showDashboard()">📊 Dashboard</button>
+                <button class="btn btn-primary" onclick="showMenuView()">📋 Menú</button>
+                <button class="btn btn-primary" onclick="showPedidosView()">🛎️ Pedidos</button>
+                <button class="btn btn-primary" onclick="showInventarioView()">📦 Inventario</button>
+                <button class="btn btn-primary" onclick="showCajaView()">💰 Caja</button>
+                <button class="btn btn-primary" onclick="showUsuariosView()">👥 Usuarios</button>
+                <button class="btn btn-primary" onclick="showReportesView()" id="btnReportes">📈 Reportes</button>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="dashboardView" class="card">
+                <h2>Dashboard</h2>
+                
+                <!-- Información de Roles y Permisos -->
+                <div style="margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px;">
+                    <h3 style="margin-top: 0; color: white;">ℹ️ Guía de Roles y Permisos</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                            <h4 style="margin: 0 0 10px 0; color: white;">👨‍💼 Administrador</h4>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+                                <li>Gestionar menú (crear/editar/eliminar productos)</li>
+                                <li>Gestionar inventario (agregar/reponer ingredientes)</li>
+                                <li>Gestionar usuarios (crear/ver todos)</li>
+                                <li>Cambiar estados de pedidos (todos)</li>
+                                <li>Ver reportes y caja</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                            <h4 style="margin: 0 0 10px 0; color: white;">🧑‍🍳 Mesero</h4>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+                                <li>Ver menú</li>
+                                <li>Crear pedidos (mesa y delivery)</li>
+                                <li>Cambiar pedidos PENDIENTE → EN_PREPARACION</li>
+                                <li>Ver estado de pedidos</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
+                            <h4 style="margin: 0 0 10px 0; color: white;">👨‍🍳 Cocinero</h4>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
+                                <li>Ver menú</li>
+                                <li>Ver pedidos en preparación</li>
+                                <li>Cambiar pedidos EN_PREPARACION → LISTO</li>
+                                <li>Ver inventario</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.15); border-radius: 6px; font-size: 13px;">
+                        <strong>💡 Flujo de trabajo:</strong> Mesero crea pedido (PENDIENTE) → Mesero envía a cocina (EN_PREPARACION) → Cocinero prepara y marca listo (LISTO) → Admin/Mesero cobra en Caja (COBRADO)
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="statProductos">-</h3>
+                        <p>Productos en Menú</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="statPedidos">-</h3>
+                        <p>Pedidos Totales</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="statUsuarios">-</h3>
+                        <p>Usuarios Registrados</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista de Menú -->
+            <div id="menuView" class="card hidden">
+                <h2>Gestión de Menú</h2>
+                
+                <div id="addProductSection" class="hidden" style="background: #f7fafc; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;">Agregar Producto</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="prodNombre" placeholder="Ej: Pulpo a la Gallega">
+                        </div>
+                        <div class="form-group">
+                            <label>Precio (€)</label>
+                            <input type="number" id="prodPrecio" step="0.01" placeholder="25.99">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select id="prodTipo">
+                                <option value="plato">Plato</option>
+                                <option value="bebida">Bebida</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="agregarProducto()">Agregar Producto</button>
+                </div>
+
+                <div id="menuList" class="loading">Cargando menú...</div>
+            </div>
+
+            <!-- Vista de Pedidos -->
+            <div id="pedidosView" class="card hidden">
+                <h2>Gestión de Pedidos</h2>
+                
+                <div style="background: #f7fafc; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;">Crear Nuevo Pedido</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Tipo de Pedido</label>
+                            <select id="pedidoTipo" onchange="togglePedidoFields()">
+                                <option value="mesa">Mesa</option>
+                                <option value="delivery">Delivery</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="mesaField">
+                            <label>Número de Mesa</label>
+                            <input type="number" id="numMesa" min="1" max="10" value="1">
+                        </div>
+                        <div class="form-group hidden" id="direccionField">
+                            <label>Dirección</label>
+                            <input type="text" id="direccion" placeholder="Calle Principal 123">
+                        </div>
+                        <div class="form-group hidden" id="telefonoField">
+                            <label>Teléfono</label>
+                            <input type="text" id="telefono" placeholder="981-123-456">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Seleccionar Producto</label>
+                        <select id="selectProducto"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="number" id="cantidad" min="1" value="1">
+                    </div>
+                    <button class="btn btn-success" onclick="crearPedido()">Crear Pedido</button>
+                </div>
+
+                <div id="pedidosList" class="loading">Cargando pedidos...</div>
+            </div>
+
+            <!-- Vista de Inventario -->
+            <div id="inventarioView" class="card hidden">
+                <h2>Gestión de Inventario</h2>
+                
+                <div id="addIngredienteSection" class="hidden" style="background: #f7fafc; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;">Agregar Ingrediente</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="ingNombre" placeholder="Ej: Pulpo">
+                        </div>
+                        <div class="form-group">
+                            <label>Unidad</label>
+                            <input type="text" id="ingUnidad" placeholder="kg, litros, unidades">
+                        </div>
+                        <div class="form-group">
+                            <label>Cantidad</label>
+                            <input type="number" id="ingCantidad" step="0.01" placeholder="10.5">
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="agregarIngrediente()">Agregar Ingrediente</button>
+                </div>
+
+                <div id="inventarioList" class="loading">Cargando inventario...</div>
+            </div>
+
+            <!-- Vista de Caja -->
+            <div id="cajaView" class="card hidden">
+                <h2>Gestión de Caja</h2>
+                
+                <!-- Estado de Caja -->
+                <div id="estadoCaja" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px; font-size: 24px;">Estado de Caja</h3>
+                    <div class="stats-grid">
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 5px;">
+                            <h3 id="totalDia" style="font-size: 28px; margin-bottom: 5px;">-</h3>
+                            <p>Total del Día</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 5px;">
+                            <h3 id="totalFacturas" style="font-size: 28px; margin-bottom: 5px;">-</h3>
+                            <p>Facturas Generadas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pedidos Listos para Cobrar -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 15px;">Pedidos Listos para Cobrar</h3>
+                    <div id="pedidosListosList" class="loading">Cargando pedidos...</div>
+                </div>
+
+                <!-- Facturas -->
+                <div>
+                    <h3 style="margin-bottom: 15px;">Facturas del Día</h3>
+                    <div id="facturasList" class="loading">Cargando facturas...</div>
+                </div>
+            </div>
+
+            <!-- Vista de Usuarios -->
+            <div id="usuariosView" class="card hidden">
+                <h2>Usuarios Registrados</h2>
+                <div id="usuariosList" class="loading">Cargando usuarios...</div>
+            </div>
+
+            <!-- Vista de Reportes (Solo Admin) -->
+            <div id="reportesView" class="card hidden">
+                <h2>Reportes de Ventas</h2>
+                <div id="reportesList" class="loading">Cargando reportes...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost';
+        let token = localStorage.getItem('token');
+        let currentUserData = null;
+
+        // Inicializar la aplicación
+        window.onload = function() {
+            if (token) {
+                verifyToken();
+            } else {
+                showAuthView();
+            }
+        };
+
+        // Mostrar alerta
+        function showAlert(message, type = 'info') {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            container.innerHTML = '';
+            container.appendChild(alert);
+            setTimeout(() => alert.remove(), 5000);
+        }
+
+        // Mostrar formulario de login
+        function showLoginForm() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        // Mostrar formulario de registro
+        function showRegisterForm() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        // Login
+        async function login() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showAlert('Por favor complete todos los campos', 'error');
+                return;
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    token = data.access_token;
+                    localStorage.setItem('token', token);
+                    showAlert('Login exitoso', 'success');
+                    await loadUserData();
+                    showMainView();
+                } else {
+                    showAlert(data.detail || 'Error al iniciar sesión', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión: ' + error.message, 'error');
+            }
+        }
+
+        // Registro
+        async function register() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const rol = document.getElementById('regRol').value;
+
+            if (!username || !email || !password) {
+                showAlert('Por favor complete todos los campos', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password, rol })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('Registro exitoso. Por favor inicie sesión', 'success');
+                    showLoginForm();
+                    document.getElementById('regUsername').value = '';
+                    document.getElementById('regEmail').value = '';
+                    document.getElementById('regPassword').value = '';
+                } else {
+                    showAlert(data.detail || 'Error al registrarse', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión: ' + error.message, 'error');
+            }
+        }
+
+        // Verificar token
+        async function verifyToken() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    await loadUserData();
+                    showMainView();
+                } else {
+                    localStorage.removeItem('token');
+                    token = null;
+                    showAuthView();
+                }
+            } catch (error) {
+                localStorage.removeItem('token');
+                token = null;
+                showAuthView();
+            }
+        }
+
+        // Cargar datos del usuario
+        async function loadUserData() {
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    currentUserData = await response.json();
+                    document.getElementById('currentUser').textContent = currentUserData.username;
+                    const badge = document.getElementById('currentRole');
+                    badge.textContent = currentUserData.rol;
+                    badge.className = `badge badge-${currentUserData.rol}`;
+
+                    // Mostrar/ocultar botón de reportes según rol
+                    if (currentUserData.rol === 'administrador') {
+                        document.getElementById('btnReportes').classList.remove('hidden');
+                        document.getElementById('addProductSection').classList.remove('hidden');
+                    } else {
+                        document.getElementById('btnReportes').classList.add('hidden');
+                        document.getElementById('addProductSection').classList.add('hidden');
+                    }
+                }
+            } catch (error) {
+                console.error('Error cargando usuario:', error);
+            }
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('token');
+            token = null;
+            currentUserData = null;
+            showAuthView();
+            showAlert('Sesión cerrada', 'info');
+        }
+
+        // Mostrar vista de autenticación
+        function showAuthView() {
+            document.getElementById('authView').classList.remove('hidden');
+            document.getElementById('mainView').classList.add('hidden');
+            showLoginForm();
+        }
+
+        // Mostrar vista principal
+        function showMainView() {
+            document.getElementById('authView').classList.add('hidden');
+            document.getElementById('mainView').classList.remove('hidden');
+            showDashboard();
+        }
+
+        // Mostrar dashboard
+        async function showDashboard() {
+            hideAllViews();
+            document.getElementById('dashboardView').classList.remove('hidden');
+            await loadDashboardStats();
+        }
+
+        // Cargar estadísticas del dashboard
+        async function loadDashboardStats() {
+            try {
+                // Cargar productos
+                const prodResponse = await fetch(`${API_URL}/menu/productos`);
+                const productos = await prodResponse.json();
+                document.getElementById('statProductos').textContent = productos.length;
+
+                // Cargar pedidos
+                const pedResponse = await fetch(`${API_URL}/pedidos`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const pedidos = await pedResponse.json();
+                document.getElementById('statPedidos').textContent = pedidos.length;
+
+                // Cargar usuarios
+                const userResponse = await fetch(`${API_URL}/auth/users`);
+                const usuarios = await userResponse.json();
+                document.getElementById('statUsuarios').textContent = usuarios.length;
+            } catch (error) {
+                console.error('Error cargando estadísticas:', error);
+            }
+        }
+
+        // Mostrar vista de menú
+        async function showMenuView() {
+            hideAllViews();
+            document.getElementById('menuView').classList.remove('hidden');
+            await loadMenu();
+            await loadProductosSelect();
+        }
+
+        // Cargar menú
+        async function loadMenu() {
+            const container = document.getElementById('menuList');
+            container.innerHTML = '<div class="loading">Cargando menú...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/menu/productos`);
+                const productos = await response.json();
+
+                if (productos.length === 0) {
+                    container.innerHTML = '<div class="empty-state">No hay productos en el menú</div>';
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>Nombre</th><th>Tipo</th><th>Precio</th>';
+                if (currentUserData.rol === 'administrador') {
+                    html += '<th>Acciones</th>';
+                }
+                html += '</tr></thead><tbody>';
+
+                productos.forEach(prod => {
+                    html += `<tr>
+                        <td>${prod.nombre}</td>
+                        <td><span class="badge badge-${prod.tipo}">${prod.tipo}</span></td>
+                        <td>€${prod.precio.toFixed(2)}</td>`;
+                    
+                    if (currentUserData.rol === 'administrador') {
+                        html += `<td><button class="btn btn-danger" onclick="eliminarProducto('${prod.id}')">Eliminar</button></td>`;
+                    }
+                    
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<div class="alert alert-error">Error cargando el menú</div>';
+            }
+        }
+
+        // Agregar producto
+        async function agregarProducto() {
+            const nombre = document.getElementById('prodNombre').value;
+            const precio = parseFloat(document.getElementById('prodPrecio').value);
+            const tipo = document.getElementById('prodTipo').value;
+
+            if (!nombre || !precio) {
+                showAlert('Complete todos los campos', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/menu/productos`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, precio, tipo })
+                });
+
+                if (response.ok) {
+                    showAlert('Producto agregado exitosamente', 'success');
+                    document.getElementById('prodNombre').value = '';
+                    document.getElementById('prodPrecio').value = '';
+                    await loadMenu();
+                    await loadProductosSelect();
+                } else {
+                    const data = await response.json();
+                    showAlert(data.detail || 'Error al agregar producto', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión: ' + error.message, 'error');
+            }
+        }
+
+        // Eliminar producto
+        async function eliminarProducto(id) {
+            if (!confirm('¿Está seguro de eliminar este producto?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/menu/productos/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    showAlert('Producto eliminado', 'success');
+                    await loadMenu();
+                    await loadProductosSelect();
+                } else {
+                    showAlert('Error al eliminar producto', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión: ' + error.message, 'error');
+            }
+        }
+
+        // Cargar productos en select
+        async function loadProductosSelect() {
+            try {
+                const response = await fetch(`${API_URL}/menu/productos`);
+                const productos = await response.json();
+
+                const select = document.getElementById('selectProducto');
+                select.innerHTML = '<option value="">Seleccione un producto...</option>';
+
+                productos.forEach(prod => {
+                    const option = document.createElement('option');
+                    option.value = prod.id;
+                    option.textContent = `${prod.nombre} - €${prod.precio.toFixed(2)}`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error cargando productos:', error);
+            }
+        }
+
+        // Mostrar vista de pedidos
+        async function showPedidosView() {
+            hideAllViews();
+            document.getElementById('pedidosView').classList.remove('hidden');
+            await loadProductosSelect();
+            await loadPedidos();
+        }
+
+        // Toggle campos de pedido
+        function togglePedidoFields() {
+            const tipo = document.getElementById('pedidoTipo').value;
+            const mesaField = document.getElementById('mesaField');
+            const direccionField = document.getElementById('direccionField');
+            const telefonoField = document.getElementById('telefonoField');
+
+            if (tipo === 'mesa') {
+                mesaField.classList.remove('hidden');
+                direccionField.classList.add('hidden');
+                telefonoField.classList.add('hidden');
+            } else {
+                mesaField.classList.add('hidden');
+                direccionField.classList.remove('hidden');
+                telefonoField.classList.remove('hidden');
+            }
+        }
+
+        // Crear pedido
+        async function crearPedido() {
+            const tipo = document.getElementById('pedidoTipo').value;
+            const productoId = document.getElementById('selectProducto').value;
+            const cantidad = parseInt(document.getElementById('cantidad').value);
+
+            if (!productoId || !cantidad) {
+                showAlert('Seleccione un producto y cantidad', 'error');
+                return;
+            }
+
+            try {
+                let url, body;
+
+                if (tipo === 'mesa') {
+                    const numMesa = parseInt(document.getElementById('numMesa').value);
+                    url = `${API_URL}/pedidos/mesa`;
+                    body = {
+                        numero_mesa: numMesa,
+                        items: [{ producto_id: productoId, cantidad }]
+                    };
+                } else {
+                    const direccion = document.getElementById('direccion').value;
+                    const telefono = document.getElementById('telefono').value;
+                    
+                    if (!direccion || !telefono) {
+                        showAlert('Complete dirección y teléfono', 'error');
+                        return;
+                    }
+
+                    url = `${API_URL}/pedidos/delivery`;
+                    body = {
+                        direccion,
+                        telefono,
+                        items: [{ producto_id: productoId, cantidad }]
+                    };
+                }
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.ok) {
+                    showAlert('Pedido creado exitosamente', 'success');
+                    document.getElementById('cantidad').value = '1';
+                    document.getElementById('selectProducto').value = '';
+                    await loadPedidos();
+                } else {
+                    const data = await response.json();
+                    showAlert(data.detail || 'Error al crear pedido', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión: ' + error.message, 'error');
+            }
+        }
+
+        // Cargar pedidos
+        async function loadPedidos() {
+            const container = document.getElementById('pedidosList');
+            container.innerHTML = '<div class="loading">Cargando pedidos...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/pedidos`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const pedidos = await response.json();
+
+                if (pedidos.length === 0) {
+                    container.innerHTML = '<div class="empty-state">No hay pedidos registrados</div>';
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>ID</th><th>Tipo</th><th>Estado</th><th>Total</th><th>Fecha</th><th>Items</th><th>Acciones</th></tr></thead><tbody>';
+
+                pedidos.forEach(ped => {
+                    const fecha = new Date(ped.fecha).toLocaleString('es-ES');
+                    const estadoLower = ped.estado.toLowerCase();
+                    
+                    // Determinar botones según el rol y estado
+                    let accionesHTML = '';
+                    const userRole = currentUserData ? currentUserData.rol : '';
+                    
+                    if (estadoLower === 'pendiente' && (userRole === 'mesero' || userRole === 'administrador')) {
+                        accionesHTML = `<button class="btn btn-info" style="padding: 6px 12px; font-size: 12px;" onclick="cambiarEstadoPedido('${ped.id}', 'EN_PREPARACION')">▶️ A Cocina</button>`;
+                    } else if (estadoLower === 'en_preparacion' && (userRole === 'cocinero' || userRole === 'administrador')) {
+                        accionesHTML = `<button class="btn btn-success" style="padding: 6px 12px; font-size: 12px;" onclick="cambiarEstadoPedido('${ped.id}', 'LISTO')">✅ Marcar Listo</button>`;
+                    } else if (estadoLower === 'listo') {
+                        accionesHTML = '<span style="color: #48bb78; font-size: 12px;">⏳ Pendiente cobro</span>';
+                    } else if (estadoLower === 'cobrado') {
+                        accionesHTML = '<span style="color: #9ca3af; font-size: 12px;">✓ Completado</span>';
+                    } else {
+                        accionesHTML = '-';
+                    }
+                    
+                    html += `<tr>
+                        <td>${ped.id.substring(0, 8)}...</td>
+                        <td>${ped.tipo || 'N/A'}</td>
+                        <td><span class="badge badge-${estadoLower}">${ped.estado}</span></td>
+                        <td>€${ped.total.toFixed(2)}</td>
+                        <td>${fecha}</td>
+                        <td>${ped.items.length} item(s)</td>
+                        <td>${accionesHTML}</td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<div class="alert alert-error">Error cargando pedidos</div>';
+            }
+        }
+
+        // Cambiar estado de pedido
+        async function cambiarEstadoPedido(pedidoId, nuevoEstado) {
+            try {
+                const response = await fetch(`${API_URL}/pedidos/${pedidoId}/estado?nuevo_estado=${nuevoEstado}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    showAlert('Estado del pedido actualizado', 'success');
+                    await loadPedidos();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.detail || 'Error al cambiar estado', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión: ' + error.message, 'error');
+            }
+        }
+
+        // Mostrar vista de inventario
+        async function showInventarioView() {
+            hideAllViews();
+            document.getElementById('inventarioView').classList.remove('hidden');
+            
+            // Mostrar sección de agregar solo si es admin
+            if (currentUserData && currentUserData.rol === 'administrador') {
+                document.getElementById('addIngredienteSection').classList.remove('hidden');
+            }
+            
+            await loadInventario();
+        }
+
+        // Cargar inventario
+        async function loadInventario() {
+            const container = document.getElementById('inventarioList');
+            container.innerHTML = '<div class="loading">Cargando inventario...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/inventario/ingredientes`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Error al cargar inventario');
+
+                const ingredientes = await response.json();
+
+                let html = '<table><thead><tr><th>Ingrediente</th><th>Cantidad</th><th>Unidad</th><th>Estado</th>';
+                
+                if (currentUserData && currentUserData.rol === 'administrador') {
+                    html += '<th>Acciones</th>';
+                }
+                
+                html += '</tr></thead><tbody>';
+
+                ingredientes.forEach(ing => {
+                    const bajoCantidad = ing.cantidad < 10;
+                    const estadoBadge = bajoCantidad ? 
+                        '<span class="badge badge-bajo-stock">⚠️ Bajo Stock</span>' : 
+                        '<span class="badge badge-stock-ok">✅ Stock OK</span>';
+
+                    html += `<tr>
+                        <td>${ing.nombre}</td>
+                        <td style="font-weight: bold; color: ${bajoCantidad ? '#f56565' : '#48bb78'}">${ing.cantidad.toFixed(2)}</td>
+                        <td>${ing.unidad}</td>
+                        <td>${estadoBadge}</td>`;
+                    
+                    if (currentUserData && currentUserData.rol === 'administrador') {
+                        html += `<td><button class="btn btn-warning" style="padding: 6px 12px; font-size: 12px;" onclick="reponerStock('${ing.id}', '${ing.nombre}')">Reponer</button></td>`;
+                    }
+                    
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<div class="alert alert-error">Error cargando inventario</div>';
+            }
+        }
+
+        // Agregar ingrediente
+        async function agregarIngrediente() {
+            const nombre = document.getElementById('ingNombre').value;
+            const unidad = document.getElementById('ingUnidad').value;
+            const cantidad = parseFloat(document.getElementById('ingCantidad').value);
+
+            if (!nombre || !unidad || !cantidad) {
+                showAlert('Por favor complete todos los campos', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/inventario/ingredientes`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ nombre, unidad, cantidad })
+                });
+
+                if (response.ok) {
+                    showAlert('Ingrediente agregado correctamente', 'success');
+                    document.getElementById('ingNombre').value = '';
+                    document.getElementById('ingUnidad').value = '';
+                    document.getElementById('ingCantidad').value = '';
+                    await loadInventario();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.detail || 'Error al agregar ingrediente', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión', 'error');
+            }
+        }
+
+        // Reponer stock
+        async function reponerStock(id, nombre) {
+            const cantidad = prompt(`¿Cuánto desea reponer de ${nombre}?`);
+            
+            if (!cantidad || isNaN(cantidad) || parseFloat(cantidad) <= 0) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/inventario/ingredientes/${id}/reponer`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ cantidad: parseFloat(cantidad) })
+                });
+
+                if (response.ok) {
+                    showAlert('Stock repuesto correctamente', 'success');
+                    await loadInventario();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.detail || 'Error al reponer stock', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión', 'error');
+            }
+        }
+
+        // Mostrar vista de caja
+        async function showCajaView() {
+            hideAllViews();
+            document.getElementById('cajaView').classList.remove('hidden');
+            await loadEstadoCaja();
+            await loadPedidosListos();
+            await loadFacturas();
+        }
+
+        // Cargar estado de caja
+        async function loadEstadoCaja() {
+            try {
+                const response = await fetch(`${API_URL}/caja/estado`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    // Si no es admin, mostrar mensaje
+                    document.getElementById('totalDia').textContent = 'N/A';
+                    document.getElementById('totalFacturas').textContent = 'N/A';
+                    return;
+                }
+
+                const estado = await response.json();
+                document.getElementById('totalDia').textContent = `€${estado.total_dia.toFixed(2)}`;
+                document.getElementById('totalFacturas').textContent = estado.total_facturas;
+            } catch (error) {
+                document.getElementById('totalDia').textContent = 'Error';
+                document.getElementById('totalFacturas').textContent = 'Error';
+            }
+        }
+
+        // Cargar pedidos listos
+        async function loadPedidosListos() {
+            const container = document.getElementById('pedidosListosList');
+            container.innerHTML = '<div class="loading">Cargando pedidos...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/pedidos`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Error al cargar pedidos');
+
+                const pedidos = await response.json();
+                const pedidosListos = pedidos.filter(p => p.estado.toUpperCase() === 'LISTO');
+
+                if (pedidosListos.length === 0) {
+                    container.innerHTML = '<div class="empty-state">No hay pedidos listos para cobrar</div>';
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>ID</th><th>Tipo</th><th>Total</th><th>Acciones</th></tr></thead><tbody>';
+
+                pedidosListos.forEach(pedido => {
+                    html += `<tr>
+                        <td>${pedido.id.substring(0, 8)}...</td>
+                        <td>${pedido.tipo}</td>
+                        <td style="font-weight: bold;">€${pedido.total.toFixed(2)}</td>
+                        <td>
+                            <button class="btn btn-success" style="padding: 6px 12px; font-size: 12px;" onclick="cobrarPedido('${pedido.id}')">💰 Cobrar</button>
+                        </td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<div class="alert alert-error">Error cargando pedidos</div>';
+            }
+        }
+
+        // Cargar facturas
+        async function loadFacturas() {
+            const container = document.getElementById('facturasList');
+            container.innerHTML = '<div class="loading">Cargando facturas...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/caja/facturas`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Error al cargar facturas');
+
+                const facturas = await response.json();
+
+                if (facturas.length === 0) {
+                    container.innerHTML = '<div class="empty-state">No hay facturas registradas</div>';
+                    return;
+                }
+
+                let html = '<table><thead><tr><th>ID</th><th>Pedido</th><th>Fecha</th><th>Total</th><th>Método Pago</th></tr></thead><tbody>';
+
+                facturas.forEach(factura => {
+                    const fecha = new Date(factura.fecha);
+                    html += `<tr>
+                        <td>${factura.id.substring(0, 8)}...</td>
+                        <td>${factura.pedido_id.substring(0, 8)}...</td>
+                        <td>${fecha.toLocaleString('es-ES')}</td>
+                        <td style="font-weight: bold;">€${factura.total.toFixed(2)}</td>
+                        <td><span class="badge badge-${factura.metodo_pago}">${factura.metodo_pago}</span></td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<div class="alert alert-error">Error cargando facturas</div>';
+            }
+        }
+
+        // Cobrar pedido
+        async function cobrarPedido(pedidoId) {
+            const metodoPago = prompt('Método de pago (efectivo/tarjeta):', 'efectivo');
+            
+            if (!metodoPago) return;
+
+            try {
+                const response = await fetch(`${API_URL}/caja/cobrar/${pedidoId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ metodo_pago: metodoPago.toLowerCase() })
+                });
+
+                if (response.ok) {
+                    showAlert('Pedido cobrado correctamente', 'success');
+                    await loadEstadoCaja();
+                    await loadPedidosListos();
+                    await loadFacturas();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.detail || 'Error al cobrar pedido', 'error');
+                }
+            } catch (error) {
+                showAlert('Error de conexión', 'error');
+            }
+        }
+
+        // Mostrar vista de usuarios
+        async function showUsuariosView() {
+            hideAllViews();
+            document.getElementById('usuariosView').classList.remove('hidden');
+            await loadUsuarios();
+        }
+
+        // Cargar usuarios
+        async function loadUsuarios() {
+            const container = document.getElementById('usuariosList');
+            container.innerHTML = '<div class="loading">Cargando usuarios...</div>';
+
+            try {
+                const response = await fetch(`${API_URL}/auth/users`);
+                const usuarios = await response.json();
+
+                let html = '<table><thead><tr><th>Usuario</th><th>Email</th><th>Rol</th><th>Estado</th></tr></thead><tbody>';
+
+                usuarios.forEach(user => {
+                    html += `<tr>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td><span class="badge badge-${user.rol}">${user.rol}</span></td>
+                        <td>${user.is_active ? '✅ Activo' : '❌ Inactivo'}</td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = '<div class="alert alert-error">Error cargando usuarios</div>';
+            }
+        }
+
+        // Mostrar vista de reportes
+        async function showReportesView() {
+            hideAllViews();
+            document.getElementById('reportesView').classList.remove('hidden');
+            await loadReportes();
+        }
+
+        // Cargar reportes
+        async function loadReportes() {
+            const container = document.getElementById('reportesList');
+            container.innerHTML = '<div class="loading">Cargando reportes...</div>';
+
+            try {
+                // Cargar ventas del día
+                const ventasResponse = await fetch(`${API_URL}/reportes/ventas`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!ventasResponse.ok) {
+                    container.innerHTML = '<div class="alert alert-error">No tiene permisos para ver reportes</div>';
+                    return;
+                }
+
+                const ventasData = await ventasResponse.json();
+
+                // Cargar productos más vendidos
+                const productosResponse = await fetch(`${API_URL}/reportes/productos-mas-vendidos?limit=10`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const productosData = await productosResponse.json();
+
+                // Cargar alertas de stock
+                const stockResponse = await fetch(`${API_URL}/reportes/alertas-stock`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const stockData = await stockResponse.json();
+
+                let html = `
+                    <div class="reporte-section">
+                        <h3>📊 Ventas del Día</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3>€${ventasData.total_ventas.toFixed(2)}</h3>
+                                <p>Total Ventas</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>${ventasData.cantidad_pedidos}</h3>
+                                <p>Pedidos</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>€${ventasData.ticket_promedio.toFixed(2)}</h3>
+                                <p>Ticket Promedio</p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; color: #666;">Fecha: ${ventasData.fecha}</p>
+                    </div>
+
+                    <div class="reporte-section">
+                        <h3>🏆 Productos Más Vendidos</h3>
+                        ${productosData.length > 0 ? `
+                            <ul class="productos-top-list">
+                                ${productosData.map((p, i) => `
+                                    <li>
+                                        <span><strong>${i + 1}.</strong> ${p.nombre}</span>
+                                        <span class="badge badge-info">${p.cantidad} vendidos</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        ` : '<div class="empty-state">No hay datos de productos vendidos</div>'}
+                    </div>
+
+                    <div class="reporte-section">
+                        <h3>⚠️ Alertas de Stock Bajo</h3>
+                        ${stockData.length > 0 ? `
+                            <div class="alert alert-warning">
+                                <strong>Ingredientes con stock bajo:</strong>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    ${stockData.map(ing => `
+                                        <li>${ing.nombre}: ${ing.cantidad_actual.toFixed(2)} ${ing.unidad} (${ing.nivel})</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        ` : '<div class="alert alert-success">✅ Todos los ingredientes tienen stock suficiente</div>'}
+                    </div>
+                `;
+
+                container.innerHTML = html;
+            } catch (error) {
+                console.error('Error cargando reportes:', error);
+                container.innerHTML = '<div class="alert alert-error">Error cargando reportes: ' + error.message + '</div>';
+            }
+        }
+
+        // Ocultar todas las vistas
+        function hideAllViews() {
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('menuView').classList.add('hidden');
+            document.getElementById('pedidosView').classList.add('hidden');
+            document.getElementById('inventarioView').classList.add('hidden');
+            document.getElementById('cajaView').classList.add('hidden');
+            document.getElementById('usuariosView').classList.add('hidden');
+            document.getElementById('reportesView').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
