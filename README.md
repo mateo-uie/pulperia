@@ -1,76 +1,112 @@
 # Sistema de Gestión - Pulpería Galán
 
-Sistema de gestión integral para restaurantes y pulperías desarrollado en Python. Permite administrar el menú, inventario, pedidos, facturación y generar reportes de ventas.
+API REST con arquitectura de 3 capas para gestión de restaurantes. Incluye autenticación JWT, control de roles (Admin, Mesero, Cocinero), gestión de pedidos con verificación automática de recetas, y sistema de facturación completo.
 
 ## Características
 
-- Gestión de menú (platos y bebidas)
-- Control de inventario de ingredientes
-- Gestión de pedidos (mesa y delivery)
-- Sistema de facturación
-- Reportes de ventas y estadísticas
-- Alertas de stock bajo
+- **Autenticación JWT** con refresh tokens
+- **Control de roles**: Admin, Mesero, Cocinero
+- **Gestión de menú** con recetas y stock
+- **Verificación automática** de ingredientes al crear pedidos
+- **Flujo de estados**: PENDIENTE → EN_PREPARACION → LISTO → COBRADO
+- **Sistema de facturación** con métodos de pago
+- **Reportes de ventas** y estadísticas
+- **Frontend SPA** con diseño responsive
 
-## Estructura del Proyecto
+## Ejecutar aplicación
 
+### Con Docker:
+
+#### Construir imagen:
+```bash
+docker build -t pulperia-galan .
 ```
-Pulperia/
-├── main.py                     # Archivo principal de demostración
-├── data/                       # Archivos JSON de datos
-│   ├── empleados.json
-│   ├── facturas.json
-│   ├── inventario.json
-│   ├── menu.json
-│   └── pedidos.json
-├── models/                     # Modelos de datos
-│   ├── factura.py
-│   ├── ingrediente.py
-│   ├── mesa.py
-│   ├── pedido.py
-│   ├── producto.py
-│   └── usuario.py
-└── services/                   # Lógica de negocio
-    ├── caja_service.py
-    ├── empleados_service.py
-    ├── inventario_service.py
-    ├── menu_service.py
-    ├── pedidos_service.py
-    └── reportes_service.py
+#### Ejecutar imagen:
+
+```bash
+docker run -d --name pulperia-galan -p 80:80 -v $(pwd)/data:/app/data pulperia-galan
 ```
 
-## Datos Iniciales
+#### Crear usuarios, menus y pedidos de prueba (opcional):
+```bash
+python3 init_data.py
+```
 
-El sistema carga datos desde archivos JSON en la carpeta `data/`. Los archivos incluyen:
-- **menu.json**: Catálogo de platos y bebidas con sus recetas
-- **inventario.json**: Stock de ingredientes disponibles
-- **pedidos.json**: Historial de pedidos
-- **facturas.json**: Registro de facturas emitidas
-- **empleados.json**: Datos de empleados del sistema
+#### Acceder a la url:
 
-## Funcionalidades Principales
+```bash
+http:/localhost/
+```
+### Sin Docker
 
-### Gestión de Menú
-- Agregar/modificar platos y bebidas
-- Definir recetas e ingredientes necesarios
-- Listar productos por categoría
+```bash
+# Crear entorno virtual
+python -m venv .venv
 
-### Inventario
-- Registrar ingredientes con stock y unidades
-- Actualizar cantidades disponibles
-- Alertas de stock bajo
+# Activar entorno virtual
+source .venv/bin/activate
 
-### Pedidos
-- Crear pedidos de mesa o delivery
-- Confirmar y cambiar estados de pedidos
-- Calcular totales automáticamente
+# Instalar dependencias
+pip install -r requirements.txt
 
-### Facturación
-- Cobrar pedidos (efectivo/tarjeta)
-- Generar facturas con detalles
-- Registro de todas las transacciones
+# Ejecutar servidor
+python3 main.py
 
-### Reportes
-- Ventas del día (total e ingresos)
-- Productos más vendidos
-- Ingredientes con stock crítico
+# Inicializar datos (opcional)
+python3 init_data.py
+
+# Acceder
+http://localhost
+```
+### Comandos adicionales de docker
+#### Ver logs
+
+```bash
+docker logs -f pulperia-galan
+```
+
+#### Detener el contenedor
+
+```bash
+docker stop pulperia-galan
+```
+
+#### Eliminar el contenedor
+
+```bash
+docker rm pulperia-galan
+```
+
+## 📋 Funcionalidades por Rol
+
+### Admin
+- Gestión completa de usuarios, productos e ingredientes
+- Acceso a todos los reportes y estadísticas
+- Configuración del sistema
+
+### Mesero
+- Crear y visualizar pedidos
+- Cobrar pedidos listos (Caja)
+- Consultar menú disponible
+
+### Cocinero
+- Ver pedidos pendientes
+- Cambiar estados: PENDIENTE → EN_PREPARACION → LISTO
+- Consultar recetas e ingredientes
+
+## 🏗️ Arquitectura
+
+**Capa de Presentación**: Frontend SPA (HTML/CSS/JS)  
+**Capa de Negocio**: API REST con FastAPI  
+**Capa de Datos**: TinyDB (JSON persistente)
+
+## 🔑 Características Técnicas
+
+- **API REST** con FastAPI y Uvicorn
+- **Autenticación JWT** (access + refresh tokens)
+- **Validación automática** de recetas al crear pedidos
+- **Descuento automático** de stock al confirmar pedidos
+- **Base de datos** TinyDB con persistencia en JSON
+- **CORS** habilitado para desarrollo
+- **Documentación** automática en `/docs`
 
