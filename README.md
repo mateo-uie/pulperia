@@ -24,7 +24,7 @@ docker build -t pulperia-galan .
 #### Ejecutar imagen:
 
 ```bash
-docker run -d --name pulperia-galan -p 80:80 -v $(pwd)/data:/app/data pulperia-galan
+docker run --name pulperia-galan -p 80:80 -v $(pwd)/data:/app/data pulperia-galan
 ```
 
 #### Crear usuarios, menus y pedidos de prueba (opcional):
