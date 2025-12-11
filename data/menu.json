@@ -1,90 +1,70 @@
 {
   "productos": [
     {
-      "id": "prod-001",
+      "id": "6d4d4923-55d2-4cc6-a9cd-1851d63591f5",
       "tipo": "Plato",
       "nombre": "Pulpo a la Gallega",
       "precio": 18.5,
       "descripcion": "Pulpo cocido con papas, aceite de oliva y pimentón",
-      "receta": {
-        "ing-001": 0.3,
-        "ing-002": 0.4,
-        "ing-003": 0.05,
-        "ing-004": 0.02
-      },
+      "receta": {},
       "categoria": "Principal"
     },
     {
-      "id": "prod-002",
+      "id": "fff65d8c-8a0b-437a-b5f1-29d06832a1da",
       "tipo": "Plato",
       "nombre": "Empanada Gallega",
       "precio": 3.5,
       "descripcion": "Empanada tradicional de carne",
-      "receta": {
-        "ing-005": 1,
-        "ing-006": 0.15,
-        "ing-007": 0.05
-      },
-      "categoria": "Entrada"
+      "receta": {},
+      "categoria": "Principal"
     },
     {
-      "id": "prod-003",
+      "id": "fea06b1b-9ed2-4a4a-8fc8-3efb079fb4f8",
       "tipo": "Plato",
       "nombre": "Bocadillo de Jamón",
       "precio": 5.0,
       "descripcion": "Bocadillo de jamón serrano con tomate",
-      "receta": {
-        "ing-008": 1,
-        "ing-009": 0.08,
-        "ing-012": 0.05
-      },
-      "categoria": "Entrada"
+      "receta": {},
+      "categoria": "Principal"
     },
     {
-      "id": "prod-004",
+      "id": "cd31a90b-23cf-4a00-8f11-ca20a6d467c0",
       "tipo": "Plato",
       "nombre": "Tarta de Santiago",
       "precio": 4.5,
       "descripcion": "Tarta tradicional de almendras",
-      "receta": {
-        "ing-013": 0.2
-      },
-      "categoria": "Postre"
+      "receta": {},
+      "categoria": "Principal"
     },
     {
-      "id": "prod-005",
+      "id": "4a9b0f02-dafd-4e90-b46d-88f9e22e0419",
       "tipo": "Plato",
-      "nombre": "Ensalada Mixta",
+      "nombre": "Caldo Gallego",
       "precio": 6.0,
-      "descripcion": "Lechuga, tomate, cebolla y queso",
-      "receta": {
-        "ing-011": 0.25,
-        "ing-012": 0.15,
-        "ing-007": 0.05,
-        "ing-010": 0.05
-      },
-      "categoria": "Entrada"
+      "descripcion": "Caldo tradicional gallego con grelos",
+      "receta": {},
+      "categoria": "Principal"
     },
     {
-      "id": "prod-006",
+      "id": "440a64a9-9013-41fa-b52f-8d245502f618",
       "tipo": "Bebida",
-      "nombre": "Vino Albariño",
+      "nombre": "Albariño",
       "precio": 12.0,
-      "descripcion": "Vino blanco gallego DO Rías Baixas",
+      "descripcion": "Vino blanco gallego",
       "receta": {},
-      "alcoholica": true
+      "alcoholica": false
     },
     {
-      "id": "prod-007",
+      "id": "0a7bdaed-c2a4-4e41-8a1e-1a8f0821f815",
       "tipo": "Bebida",
-      "nombre": "Cerveza Estrella Galicia",
-      "precio": 2.5,
-      "descripcion": "Cerveza rubia gallega",
+      "nombre": "Ribeiro",
+      "precio": 10.0,
+      "descripcion": "Vino tinto joven",
       "receta": {},
-      "alcoholica": true
+      "alcoholica": false
     },
     {
-      "id": "prod-008",
+      "id": "e89eb0a2-ec20-499d-9426-b1abbbdfe248",
       "tipo": "Bebida",
       "nombre": "Agua Mineral",
       "precio": 1.5,
@@ -93,7 +73,7 @@
       "alcoholica": false
     },
     {
-      "id": "prod-009",
+      "id": "3f48661a-9056-4d2c-827d-58dd7cf0a0af",
       "tipo": "Bebida",
       "nombre": "Café",
       "precio": 1.2,
@@ -102,52 +82,13 @@
       "alcoholica": false
     },
     {
-      "id": "prod-010",
+      "id": "755f2d0f-178f-4035-b098-c3bb6d22ec7c",
       "tipo": "Bebida",
-      "nombre": "Queimada",
-      "precio": 8.0,
-      "descripcion": "Bebida tradicional gallega",
+      "nombre": "Cerveza Estrella Galicia",
+      "precio": 2.5,
+      "descripcion": "Cerveza gallega",
       "receta": {},
-      "alcoholica": true
-    },
-    {
-      "id": "d43c62d3-10cc-4192-870c-44328fe59368",
-      "tipo": "Plato",
-      "nombre": "Lacón con Grelos",
-      "precio": 16.0,
-      "descripcion": "Plato tradicional gallego con lacón, grelos y cachelos",
-      "receta": {
-        "037d75d0-5470-473a-999f-6537948cc848": 0.3,
-        "4449b7c7-7164-4d97-8f21-537c8350a425": 0.2,
-        "5bc66add-bcbb-46b6-8861-cbf227207a7e": 0.3
-      },
-      "categoria": "Principal"
-    },
-    {
-      "id": "2e33ab26-0032-4245-b898-64bddd7e5a3d",
-      "tipo": "Plato",
-      "nombre": "Lacón con Grelos",
-      "precio": 16.0,
-      "descripcion": "Plato tradicional gallego con lacón, grelos y cachelos",
-      "receta": {
-        "7b615d02-8640-4e38-ac0e-92f80330cd9f": 0.3,
-        "7de0f2a3-91c9-4e25-a612-0239272f0096": 0.2,
-        "1902de25-4e91-4981-9449-7650cab32382": 0.3
-      },
-      "categoria": "Principal"
-    },
-    {
-      "id": "a017c97e-a2e2-41b5-9b92-824bf522fdea",
-      "tipo": "Plato",
-      "nombre": "Lacón con Grelos",
-      "precio": 16.0,
-      "descripcion": "Plato tradicional gallego con lacón, grelos y cachelos",
-      "receta": {
-        "30804477-3487-4b61-9fb2-84bacfde38fb": 0.3,
-        "93ac13be-3539-4636-8942-07a9ef4be829": 0.2,
-        "3944380a-9789-4147-9b31-c0019aaa3715": 0.3
-      },
-      "categoria": "Principal"
+      "alcoholica": false
     }
   ]
 }

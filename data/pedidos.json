@@ -1,0 +1,230 @@
+{
+  "pedidos": [
+    {
+      "id": "349c294b-1fe3-4c21-86e9-0b309542bd14",
+      "tipo": "mesa",
+      "fecha": "2025-12-11T21:15:36.880805",
+      "items": [
+        {
+          "producto_id": "6d4d4923-55d2-4cc6-a9cd-1851d63591f5",
+          "nombre_producto": "Pulpo a la Gallega",
+          "cantidad": 1,
+          "precio_unitario": 18.5
+        },
+        {
+          "producto_id": "440a64a9-9013-41fa-b52f-8d245502f618",
+          "nombre_producto": "Albariño",
+          "cantidad": 1,
+          "precio_unitario": 12.0
+        },
+        {
+          "producto_id": "cd31a90b-23cf-4a00-8f11-ca20a6d467c0",
+          "nombre_producto": "Tarta de Santiago",
+          "cantidad": 1,
+          "precio_unitario": 4.5
+        }
+      ],
+      "estado": "COBRADO",
+      "mesa_id": "496c2722-3f8e-46a1-9769-8ed6ce4b7e60",
+      "direccion_delivery": null,
+      "telefono_delivery": null
+    },
+    {
+      "id": "637bc77d-ab00-4eca-8fb7-766e1cf3cd84",
+      "tipo": "mesa",
+      "fecha": "2025-12-11T21:15:36.885270",
+      "items": [
+        {
+          "producto_id": "fff65d8c-8a0b-437a-b5f1-29d06832a1da",
+          "nombre_producto": "Empanada Gallega",
+          "cantidad": 1,
+          "precio_unitario": 3.5
+        },
+        {
+          "producto_id": "755f2d0f-178f-4035-b098-c3bb6d22ec7c",
+          "nombre_producto": "Cerveza Estrella Galicia",
+          "cantidad": 1,
+          "precio_unitario": 2.5
+        }
+      ],
+      "estado": "COBRADO",
+      "mesa_id": "32dd7a80-237e-4696-90f6-c23f40a8d8db",
+      "direccion_delivery": null,
+      "telefono_delivery": null
+    },
+    {
+      "id": "79ad41d7-18d5-4e67-8d28-4a64a2cdf484",
+      "tipo": "mesa",
+      "fecha": "2025-12-11T21:15:36.890400",
+      "items": [
+        {
+          "producto_id": "4a9b0f02-dafd-4e90-b46d-88f9e22e0419",
+          "nombre_producto": "Caldo Gallego",
+          "cantidad": 1,
+          "precio_unitario": 6.0
+        },
+        {
+          "producto_id": "fea06b1b-9ed2-4a4a-8fc8-3efb079fb4f8",
+          "nombre_producto": "Bocadillo de Jamón",
+          "cantidad": 1,
+          "precio_unitario": 5.0
+        },
+        {
+          "producto_id": "e89eb0a2-ec20-499d-9426-b1abbbdfe248",
+          "nombre_producto": "Agua Mineral",
+          "cantidad": 1,
+          "precio_unitario": 1.5
+        }
+      ],
+      "estado": "COBRADO",
+      "mesa_id": "8a33244f-d7c4-4db3-8b24-1f919fe85234",
+      "direccion_delivery": null,
+      "telefono_delivery": null
+    },
+    {
+      "id": "841244af-82b8-4d40-9739-46033995e7e2",
+      "tipo": "mesa",
+      "fecha": "2025-12-11T21:15:36.897509",
+      "items": [
+        {
+          "producto_id": "6d4d4923-55d2-4cc6-a9cd-1851d63591f5",
+          "nombre_producto": "Pulpo a la Gallega",
+          "cantidad": 1,
+          "precio_unitario": 18.5
+        },
+        {
+          "producto_id": "0a7bdaed-c2a4-4e41-8a1e-1a8f0821f815",
+          "nombre_producto": "Ribeiro",
+          "cantidad": 1,
+          "precio_unitario": 10.0
+        },
+        {
+          "producto_id": "cd31a90b-23cf-4a00-8f11-ca20a6d467c0",
+          "nombre_producto": "Tarta de Santiago",
+          "cantidad": 1,
+          "precio_unitario": 4.5
+        },
+        {
+          "producto_id": "3f48661a-9056-4d2c-827d-58dd7cf0a0af",
+          "nombre_producto": "Café",
+          "cantidad": 1,
+          "precio_unitario": 1.2
+        }
+      ],
+      "estado": "EN_PREPARACION",
+      "mesa_id": "1e0f8829-c25c-4fa9-bdfa-7aa2a10d23f0",
+      "direccion_delivery": null,
+      "telefono_delivery": null
+    },
+    {
+      "id": "cb2a63ee-de20-4caf-9a2f-d8d73af5256c",
+      "tipo": "mesa",
+      "fecha": "2025-12-11T21:15:36.903813",
+      "items": [
+        {
+          "producto_id": "fff65d8c-8a0b-437a-b5f1-29d06832a1da",
+          "nombre_producto": "Empanada Gallega",
+          "cantidad": 1,
+          "precio_unitario": 3.5
+        },
+        {
+          "producto_id": "4a9b0f02-dafd-4e90-b46d-88f9e22e0419",
+          "nombre_producto": "Caldo Gallego",
+          "cantidad": 1,
+          "precio_unitario": 6.0
+        },
+        {
+          "producto_id": "e89eb0a2-ec20-499d-9426-b1abbbdfe248",
+          "nombre_producto": "Agua Mineral",
+          "cantidad": 1,
+          "precio_unitario": 1.5
+        },
+        {
+          "producto_id": "3f48661a-9056-4d2c-827d-58dd7cf0a0af",
+          "nombre_producto": "Café",
+          "cantidad": 1,
+          "precio_unitario": 1.2
+        }
+      ],
+      "estado": "EN_PREPARACION",
+      "mesa_id": "6dd8b165-be8d-4260-8c10-59123a59a6fe",
+      "direccion_delivery": null,
+      "telefono_delivery": null
+    },
+    {
+      "id": "fc8fd01d-7bb5-494c-ba1d-eae83a06b3c0",
+      "tipo": "delivery",
+      "fecha": "2025-12-11T21:15:36.910111",
+      "items": [
+        {
+          "producto_id": "fff65d8c-8a0b-437a-b5f1-29d06832a1da",
+          "nombre_producto": "Empanada Gallega",
+          "cantidad": 1,
+          "precio_unitario": 3.5
+        },
+        {
+          "producto_id": "755f2d0f-178f-4035-b098-c3bb6d22ec7c",
+          "nombre_producto": "Cerveza Estrella Galicia",
+          "cantidad": 1,
+          "precio_unitario": 2.5
+        }
+      ],
+      "estado": "PENDIENTE",
+      "mesa_id": null,
+      "direccion_delivery": "Calle Real 123, Santiago",
+      "telefono_delivery": "981-123-456"
+    },
+    {
+      "id": "5bcf8728-d722-42a2-bac0-97a1821f36e9",
+      "tipo": "delivery",
+      "fecha": "2025-12-11T21:15:36.916473",
+      "items": [
+        {
+          "producto_id": "6d4d4923-55d2-4cc6-a9cd-1851d63591f5",
+          "nombre_producto": "Pulpo a la Gallega",
+          "cantidad": 1,
+          "precio_unitario": 18.5
+        },
+        {
+          "producto_id": "cd31a90b-23cf-4a00-8f11-ca20a6d467c0",
+          "nombre_producto": "Tarta de Santiago",
+          "cantidad": 1,
+          "precio_unitario": 4.5
+        },
+        {
+          "producto_id": "e89eb0a2-ec20-499d-9426-b1abbbdfe248",
+          "nombre_producto": "Agua Mineral",
+          "cantidad": 1,
+          "precio_unitario": 1.5
+        }
+      ],
+      "estado": "PENDIENTE",
+      "mesa_id": null,
+      "direccion_delivery": "Avenida de Compostela 45, A Coruña",
+      "telefono_delivery": "981-234-567"
+    },
+    {
+      "id": "ee92d7e1-6b72-462c-b34e-bb500e6a7d19",
+      "tipo": "delivery",
+      "fecha": "2025-12-11T21:15:36.921903",
+      "items": [
+        {
+          "producto_id": "fea06b1b-9ed2-4a4a-8fc8-3efb079fb4f8",
+          "nombre_producto": "Bocadillo de Jamón",
+          "cantidad": 1,
+          "precio_unitario": 5.0
+        },
+        {
+          "producto_id": "e89eb0a2-ec20-499d-9426-b1abbbdfe248",
+          "nombre_producto": "Agua Mineral",
+          "cantidad": 1,
+          "precio_unitario": 1.5
+        }
+      ],
+      "estado": "PENDIENTE",
+      "mesa_id": null,
+      "direccion_delivery": "Plaza de España 7, Vigo",
+      "telefono_delivery": "986-345-678"
+    }
+  ]
+}

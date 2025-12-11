@@ -1,0 +1,25 @@
+{
+  "facturas": [
+    {
+      "id": "6ff8de72-2659-49a4-aea2-a1fe74dddf3c",
+      "pedido_id": "349c294b-1fe3-4c21-86e9-0b309542bd14",
+      "fecha": "2025-12-11T21:15:38.281440",
+      "total": 35.0,
+      "metodo_pago": "efectivo"
+    },
+    {
+      "id": "7c3b7e4a-c94d-4edf-ae4c-889267abcc21",
+      "pedido_id": "637bc77d-ab00-4eca-8fb7-766e1cf3cd84",
+      "fecha": "2025-12-11T21:15:38.390893",
+      "total": 6.0,
+      "metodo_pago": "tarjeta"
+    },
+    {
+      "id": "e966986d-a27c-469f-8e5e-22bef46f9df1",
+      "pedido_id": "79ad41d7-18d5-4e67-8d28-4a64a2cdf484",
+      "fecha": "2025-12-11T21:15:38.506263",
+      "total": 12.5,
+      "metodo_pago": "efectivo"
+    }
+  ]
+}
